@@ -1,0 +1,166 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #1e1e1e, #2e2e2e);
+  color: #eee;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #111;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00ff99;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo::before {
+  content: '🔥';
+  display: inline-block;
+  animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #eee;
+  font-weight: bold;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #00ff99;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: #00ff99;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Dashboard Form */
+.dashboard {
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: auto;
+  background: #1e1e1e;
+  color: #eee;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,255,153,0.2);
+}
+
+.dashboard h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.dashboard input,
+.dashboard select,
+.dashboard textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: #fff;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* Buttons */
+.dashboard button,
+.btn {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #00ff99, #00c8ff);
+  border: none;
+  padding: 12px;
+  border-radius: 30px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px #00ff99aa;
+}
+
+.dashboard button:hover,
+.btn:hover {
+  background: linear-gradient(135deg, #00cc77, #0099cc);
+  transform: scale(1.05);
+}
+
+/* Status Message */
+.status {
+  margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Logout Link */
+.logout-btn {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.logout-btn a {
+  color: #ff6666;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logout-btn a:hover {
+  color: #ff3333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 20px;
+  }
+}
+
+
+

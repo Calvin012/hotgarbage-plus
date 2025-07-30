@@ -1,0 +1,52 @@
+<!-- public/booking.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Garbage Collection</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Request Garbage Collection</h2>
+
+    <input type="text" id="name" placeholder="Full Name" required />
+    <input type="text" id="phone" placeholder="Phone Number" required />
+    <input type="text" id="location" placeholder="Service Location" required />
+    <input type="date" id="date" required />
+    <select id="type">
+      <option value="">Select Service Type</option>
+      <option value="Household Pickup">Household Pickup</option>
+      <option value="Bulk Waste">Bulk Waste</option>
+      <option value="Recyclables">Recyclables</option>
+    </select>
+    <textarea id="notes" rows="3" placeholder="Additional Notes"></textarea>
+
+    <button onclick="submitBooking()">Submit Request</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    async function submitBooking() {
+      const booking = {
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        location: document.getElementById('location').value,
+        date: document.getElementById('date').value,
+        type: document.getElementById('type').value,
+        notes: document.getElementById('notes').value
+      };
+
+      const res = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking)
+      });
+
+      const data = await res.json();
+      document.getElementById('msg').innerText = data.message;
+    }
+  </script>
+</body>
+</html>

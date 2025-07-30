@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HotGarbage+ Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="dashboard">
+    <h2>🔥 Welcome to HotGarbage+</h2>
+    <p>You are logged in as: <span id="userPhone"></span></p>
+
+    <form id="bookingForm">
+      <label for="service">Service Type</label>
+      <select id="service" required>
+        <option value="">-- Select a Service --</option>
+        <option value="Home Garbage Pickup">Home Garbage Pickup</option>
+        <option value="Bulk Waste Removal">Bulk Waste Removal</option>
+        <option value="Recyclable Pickup">Recyclable Pickup</option>
+      </select>
+
+      <label for="date">Preferred Date</label>
+      <input type="date" id="date" required />
+
+      <label for="notes">Additional Notes (Optional)</label>
+      <textarea id="notes" rows="4"></textarea>
+
+      <button type="submit">Submit Booking</button>
+    </form>
+
+    <div class="status" id="status"></div>
+    <div class="logout-btn"><a href="/logout">🚪 Logout</a></div>
+  </div>
+
+  <script>
+    fetch('/api/session')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.user) window.location.href = '/login.html';
+        else document.getElementById('userPhone').textContent = data.user.phone;
+      });
+
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const service = document.getElementById('service').value;
+      const date = document.getElementById('date').value;
+      const notes = document.getElementById('notes').value;
+      fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ service, date, notes })
+      })
+      .then(res => res.json())
+      .then(data => {
+        const status = document.getElementById('status');
+        if (data.success) {
+          status.innerHTML = `<p style="color: #00ff99;">${data.message}</p>`;
+          document.getElementById('bookingForm').reset();
+        } else {
+          status.innerHTML = `<p style="color: #ff6666;">${data.message}</p>`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
