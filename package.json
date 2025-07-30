@@ -1,16 +1,17 @@
 {
-  "name": "project-1",
+  "name": "hotgarbage-plus",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Garbage collection management system with admin and customer interface.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Calvin Methu",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "express": "^5.1.0",
-    "express-session": "^1.18.2"
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
   }
 }
+
